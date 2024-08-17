@@ -57,5 +57,5 @@ print("Hello, World!");
 ask("What is NLP?") -> explain("Natural Language Processing involves computational techniques for analyzing and modeling human language.");
 
 ## Contribution
-We welcome contributions to CodeCraze! If you’d like to contribute, please fork the repository and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
+We welcome contributions to CodeCraze! If you’d like to contribute, please fork the repository and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.There might be a good amount of issues feel free to address it
    
