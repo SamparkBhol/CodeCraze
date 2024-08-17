@@ -2,14 +2,34 @@ document.addEventListener('DOMContentLoaded', function () {
     const codeInput = document.getElementById('code-input');
     const output = document.getElementById('output');
     const runBtn = document.getElementById('run-btn');
-    const developerNameElement = document.querySelector('.developer-name');
-    const aboutTextElement = document.querySelector('.about-text');
 
     runBtn.addEventListener('click', () => {
         const code = codeInput.value;
-        // Mock code execution - this would integrate with your backend.
-        output.textContent = `Output:\n${code}\n\nExecution complete.`;
+        // Simulate code execution
+        const simulatedOutput = simulateCodeExecution(code);
+        output.textContent = `Output:\n${simulatedOutput}\n\nExecution complete.`;
     });
+
+    function simulateCodeExecution(code) {
+        // Simple parser for demonstration purposes
+        if (code.includes('generate_code')) {
+            return `
+function sortList(arr) {
+    return arr.sort((a, b) => a - b);
+}
+`;
+        }
+        
+        if (code.includes('print(function_code)')) {
+            return `
+function sortList(arr) {
+    return arr.sort((a, b) => a - b);
+}
+`;
+        }
+        
+        return 'Error: Code not recognized or not implemented.';
+    }
 
     // Typing animation for the developer section
     const developerName = 'Sampark Bhol';
@@ -26,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         My ultimate goal is to be at the forefront of AI and ML advancements, driving research that leads to practical applications and real-world impact. By combining technical expertise, creativity, and a passion for solving complex problems, I am dedicated to making significant contributions to the field and shaping the future of technology.
     `;
-    
     dynamicTypingAnimation('.developer-name', developerName, 100);
     displayAboutText('.about-text', aboutText);
 });
@@ -34,25 +53,11 @@ document.addEventListener('DOMContentLoaded', function () {
 function dynamicTypingAnimation(selector, text, speed) {
     const element = document.querySelector(selector);
     let index = 0;
-    let isTyping = true;
-
     function type() {
         if (index < text.length) {
-            if (isTyping) {
-                element.textContent += text.charAt(index);
-                index++;
-                setTimeout(type, speed);
-            }
-        } else {
-            setTimeout(() => {
-                isTyping = false;
-                setTimeout(() => {
-                    element.textContent = ''; // Clear text and restart animation
-                    index = 0;
-                    isTyping = true;
-                    type();
-                }, 2000); // Wait before restarting animation
-            }, 2000);
+            element.textContent += text.charAt(index);
+            index++;
+            setTimeout(type, speed);
         }
     }
     type();
@@ -60,5 +65,5 @@ function dynamicTypingAnimation(selector, text, speed) {
 
 function displayAboutText(selector, text) {
     const element = document.querySelector(selector);
-    element.innerHTML = text;
+    element.textContent = text;
 }
