@@ -11,7 +11,6 @@ Welcome to **CodeCraze**! 🎉 This project is designed to provide an interactiv
 - [Examples](#examples)
 - [How It Works](#how-it-works)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
@@ -48,7 +47,7 @@ Welcome to **CodeCraze**! 🎉 This project is designed to provide an interactiv
     Run Code: Click the "Run Code" button to execute your code and see the output.
     View Results: The output will be displayed below the textarea.
 
-## Example
+## Examples
 print("Hello, World!");
 ask("What is NLP?") -> explain("Natural Language Processing involves computational techniques for analyzing and modeling human language.");
 
