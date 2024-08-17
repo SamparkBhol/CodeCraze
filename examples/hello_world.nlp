@@ -1,0 +1,21 @@
+# hello_world.nlp
+# This is a simple Hello World example in the new programming language.
+# The code showcases basic syntax, variables, and function definitions.
+
+# Function to print a greeting
+def greet(name):
+    message = "Hello, " + name + "! Welcome to the future of programming."
+    return message
+
+# Main execution starts here
+name = "World"
+print(greet(name))
+
+# Output should be:
+# Hello, World! Welcome to the future of programming.
+
+# Demonstrating a conditional statement
+if name == "World":
+    print("This is just the beginning!")
+else:
+    print("Personalized greeting detected.")

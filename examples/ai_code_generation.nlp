@@ -1,0 +1,35 @@
+# ai_code_generation.nlp
+# This file showcases the AI-driven code generation features.
+
+# Start with a prompt: Create a class for a task scheduler
+class TaskScheduler:
+    def __init__(self):
+        self.tasks = []
+
+    # Command: Add a task to the scheduler
+    def add_task(self, task_name, due_date):
+        task = {"name": task_name, "due": due_date, "status": "Pending"}
+        self.tasks.append(task)
+        print(f"Task '{task_name}' added, due on {due_date}.")
+
+    # Command: Mark a task as completed
+    def complete_task(self, task_name):
+        for task in self.tasks:
+            if task["name"] == task_name:
+                task["status"] = "Completed"
+                print(f"Task '{task_name}' completed.")
+                return
+
+        print(f"Task '{task_name}' not found.")
+
+    # Command: Review all tasks
+    def review_tasks(self):
+        for task in self.tasks:
+            print(f"Task: {task['name']} - Due: {task['due']} - Status: {task['status']}")
+
+# Demonstration of the TaskScheduler
+scheduler = TaskScheduler()
+scheduler.add_task("Write Documentation", "2024-08-15")
+scheduler.add_task("Prepare Presentation", "2024-08-18")
+scheduler.complete_task("Write Documentation")
+scheduler.review_tasks()
