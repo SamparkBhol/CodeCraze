@@ -23,6 +23,11 @@ Welcome to **CodeCraze**! 🎉 This project is designed to provide an interactiv
 - **Example Code:** Start with pre-written examples to get a feel for the language.
 - **Developer Profile:** Learn more about the creator of CodeCraze.
 
+## Screenshot of Interface
+![image](https://github.com/user-attachments/assets/bfa6da04-cfaf-48e2-be0b-db07519022fe)
+![image](https://github.com/user-attachments/assets/f6ba004e-31e3-4f49-9676-53eee21e3e4f)
+![image](https://github.com/user-attachments/assets/2127d349-2e8b-4ea8-ae79-1e1123f4b4d9)
+
 ## Setup
 
 ### Prerequisites
