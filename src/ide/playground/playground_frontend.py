@@ -27,24 +27,24 @@ class PlaygroundFrontend:
         self.highlight_button.pack(side=tk.LEFT, padx=10, pady=10)
     
     def execute_code(self):
-        code = self.text_area.get("1.0", tk.END)
+        code = self.text_area.get("1.0", tk.END).strip()
         response = self._post_request("/execute", {"source_code": code})
         messagebox.showinfo("Execution Result", response.get("message", "No message returned"))
     
     def optimize_code(self):
-        code = self.text_area.get("1.0", tk.END)
+        code = self.text_area.get("1.0", tk.END).strip()
         response = self._post_request("/optimize", {"source_code": code})
         self.text_area.delete("1.0", tk.END)
         self.text_area.insert(tk.INSERT, response.get("optimized_code", "No optimized code returned"))
         messagebox.showinfo("Optimization Result", "Code optimized successfully.")
     
     def run_nlp_command(self):
-        command = self.text_area.get("1.0", tk.END)
+        command = self.text_area.get("1.0", tk.END).strip()
         response = self._post_request("/nlp-command", {"command": command})
         self.text_area.insert(tk.INSERT, "\n" + response.get("response", "No response returned"))
     
     def syntax_highlight(self):
-        code = self.text_area.get("1.0", tk.END)
+        code = self.text_area.get("1.0", tk.END).strip()
         response = self._post_request("/syntax-highlight", {"source_code": code})
         self.text_area.delete("1.0", tk.END)
         self.text_area.insert(tk.INSERT, response.get("highlighted_code", "No highlighted code returned"))
