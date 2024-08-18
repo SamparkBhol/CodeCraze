@@ -37,15 +37,56 @@ Welcome to **CodeCraze**! 🎉 This project is designed to provide an interactiv
 
 ### Getting Started
 
-1. **Clone the Repository:**
+**Clone the Repository:**
 
-   ```bash
+   bash
    git clone https://github.com/your-username/CodeCraze.git
    cd CodeCraze
    
-2. **Open index.html in Your Browser:**
+**Set Up the Environment:**
 
-   Simply open the index.html file in your preferred web browser to start using CodeCraze.
+Ensure you have Python and pip installed. It's recommended to use a virtual environment for Python projects. Create and activate a virtual environment:
+
+bash
+Copy code
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+Install Dependencies:
+
+**Install the necessary Python packages using pip:**
+
+bash
+Copy code
+pip install -r requirements.txt
+Make sure requirements.txt includes Flask and any other required packages.
+
+**Run the Flask Backend:**
+
+Start the Flask server to enable the backend functionalities for CodeCraze:
+
+bash
+Copy code
+flask run
+By default, Flask will run on http://localhost:5000. Ensure this matches the URL specified in your frontend code (playground_frontend.py).
+
+**Open index.html in Your Browser:**
+
+Simply open the index.html file located in the CodeCraze directory in your preferred web browser to start using CodeCraze.
+
+You can do this by double-clicking the file or opening it through your browser's "Open File" menu.
+
+**Accessing the Playground:**
+
+Navigate to the "Playground" section on the website.
+Use the provided textarea to write and execute your NLP commands.
+The Flask backend will handle the execution and return results directly to the web interface.
+
+**Additional Notes**
+Backend Scripts: Ensure that playground_backend.py and other related backend scripts are correctly set up and running as per the Flask application. The backend handles the API requests from the frontend.
+
+**Frontend and Backend Communication:** The frontend (HTML/JavaScript) sends requests to the backend Flask server. Make sure that the endpoints (e.g., /execute, /optimize, /nlp-command, /syntax-highlight) are correctly defined and functioning in your Flask application.
+
+**Troubleshooting:** If you encounter any issues, check the browser console for errors and ensure the Flask server is running without issues. Check Flask logs for any server-side errors.
 
 ## Usage
     Enter Code: Write your code in the textarea under the Playground section.
