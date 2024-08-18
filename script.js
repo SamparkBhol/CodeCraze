@@ -3,32 +3,112 @@ document.addEventListener('DOMContentLoaded', function () {
     const output = document.getElementById('output');
     const runBtn = document.getElementById('run-btn');
 
+    let tasks = {};
+
+    // Command Registry
+    const commandRegistry = {
+        generate_code: generateCode,
+        create_task: createTask,
+        assign: assignTask,
+        deadline: setDeadline,
+        priority: setPriority,
+        track_progress: trackProgress,
+        ask: handleAsk,
+        print: printOutput
+    };
+
     runBtn.addEventListener('click', () => {
         const code = codeInput.value;
-        // Simulate code execution
-        const simulatedOutput = simulateCodeExecution(code);
-        output.textContent = `Output:\n${simulatedOutput}\n\nExecution complete.`;
+        const results = executeCode(code);
+        output.textContent = `Output:\n${results.join('\n')}\n\nExecution complete.`;
     });
 
-    function simulateCodeExecution(code) {
-        // Simple parser for demonstration purposes
-        if (code.includes('generate_code')) {
-            return `
+    function executeCode(code) {
+        const lines = code.split('\n');
+        const results = [];
+
+        lines.forEach(line => {
+            line = line.trim();
+            const [command, ...args] = parseCommand(line);
+
+            if (commandRegistry[command]) {
+                results.push(commandRegistry[command](...args));
+            } else {
+                results.push(`Unknown command: ${line}`);
+            }
+        });
+
+        return results;
+    }
+
+    // Command Functions
+
+    function generateCode(command, input) {
+        return `
 function sortList(arr) {
     return arr.sort((a, b) => a - b);
 }
-`;
+        `;
+    }
+
+    function createTask(taskName) {
+        tasks[taskName] = { assignee: null, deadline: null, priority: null, progress: 0 };
+        return `Task "${taskName}" created.`;
+    }
+
+    function assignTask(taskName, assignee) {
+        if (tasks[taskName]) {
+            tasks[taskName].assignee = assignee;
+            return `Task "${taskName}" assigned to ${assignee}.`;
         }
-        
-        if (code.includes('print(function_code)')) {
-            return `
-function sortList(arr) {
-    return arr.sort((a, b) => a - b);
-}
-`;
+        return `Task "${taskName}" not found.`;
+    }
+
+    function setDeadline(taskName, deadline) {
+        if (tasks[taskName]) {
+            tasks[taskName].deadline = deadline;
+            return `Deadline for task "${taskName}" set to ${deadline}.`;
         }
-        
-        return 'Error: Code not recognized or not implemented.';
+        return `Task "${taskName}" not found.`;
+    }
+
+    function setPriority(taskName, priority) {
+        if (tasks[taskName]) {
+            tasks[taskName].priority = priority;
+            return `Priority for task "${taskName}" set to ${priority}.`;
+        }
+        return `Task "${taskName}" not found.`;
+    }
+
+    function trackProgress(taskName) {
+        if (tasks[taskName]) {
+            tasks[taskName].progress += 10; // Simulate progress tracking
+            return `Progress of task "${taskName}" is now ${tasks[taskName].progress}%.`;
+        }
+        return `Task "${taskName}" not found.`;
+    }
+
+    function handleAsk(question) {
+        if (question.includes("What is NLP?")) {
+            return "NLP involves computational techniques for analyzing and modeling human language.";
+        }
+        return "I'm not sure about that.";
+    }
+
+    function printOutput(variable) {
+        if (variable === 'function_code') {
+            return generateCode('generate_code');
+        }
+        return `Output: ${variable}`;
+    }
+
+    // Helper Functions
+
+    function parseCommand(line) {
+        const command = line.match(/^\w+/)[0];
+        const args = line.match(/\(([^)]+)\)/);
+        const parameters = args ? args[1].split(',').map(arg => arg.trim().replace(/["']/g, '')) : [];
+        return [command, ...parameters];
     }
 
     // Typing animation for the developer section
@@ -67,3 +147,39 @@ function displayAboutText(selector, text) {
     const element = document.querySelector(selector);
     element.textContent = text;
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const codeInput = document.getElementById('code-input');
+    const output = document.getElementById('output');
+    const runBtn = document.getElementById('run-btn');
+
+    runBtn.addEventListener('click', () => {
+        const code = codeInput.value.trim();
+        if (code) {
+            executeCommand(code);
+        } else {
+            output.textContent = "Please enter a command to execute.";
+        }
+    });
+
+    function executeCommand(code) {
+        fetch('/execute', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ command: code }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.result) {
+                output.textContent = `Output:\n${data.result}\n\nExecution complete.`;
+            } else {
+                output.textContent = "No output was returned.";
+            }
+        })
+        .catch(error => {
+            output.textContent = `Error:\n${error.message}`;
+        });
+    }
+});
