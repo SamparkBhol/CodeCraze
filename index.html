@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
     <script defer src="execute.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #code-input, #output { width: 100%; }
+        #output { white-space: pre-wrap; }
+        button { margin: 5px; }
+        header { background-color: #f4f4f4; padding: 10px; text-align: center; }
+        nav ul { list-style: none; padding: 0; }
+        nav ul li { display: inline; margin-right: 10px; }
+        nav ul li a { text-decoration: none; color: #333; }
+        .section { padding: 20px; }
+        .playground-wrapper { margin: 20px auto; max-width: 800px; }
+        .btn { padding: 10px 20px; border: none; background-color: #007bff; color: #fff; cursor: pointer; }
+        .btn:hover { background-color: #0056b3; }
+    </style>
 </head>
 <body>
     <header>
@@ -61,5 +75,35 @@
     <footer>
         <p>&copy; 2024 Sampark Bhol. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const codeInput = document.getElementById('code-input');
+            const output = document.getElementById('output');
+            const runBtn = document.getElementById('run-btn');
+
+            runBtn.addEventListener('click', () => {
+                const code = codeInput.value;
+                executeCommand(code);
+            });
+
+            function executeCommand(code) {
+                fetch('/execute', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ command: code }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    output.textContent = `Output:\n${data.result}\n\nExecution complete.`;
+                })
+                .catch(error => {
+                    output.textContent = `Error:\n${error.message}`;
+                });
+            }
+        });
+    </script>
 </body>
 </html>
