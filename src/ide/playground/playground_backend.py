@@ -32,7 +32,7 @@ def execute_code():
     except Exception as e:
         error_message = error_handler.handle_runtime_error(str(e))
         logging.error(f"Error during code execution: {error_message}")
-        return jsonify({"status": "error", "message": error_message})
+        return jsonify({"status": "error", "message": error_message}), 500
 
 @app.route('/nlp-command', methods=['POST'])
 def run_nlp_command():
@@ -49,7 +49,7 @@ def run_nlp_command():
     except Exception as e:
         error_message = error_handler.handle_runtime_error(str(e))
         logging.error(f"Error during NLP command processing: {error_message}")
-        return jsonify({"status": "error", "message": error_message})
+        return jsonify({"status": "error", "message": error_message}), 500
 
 @app.route('/optimize', methods=['POST'])
 def optimize_code():
@@ -66,7 +66,7 @@ def optimize_code():
     except Exception as e:
         error_message = error_handler.handle_runtime_error(str(e))
         logging.error(f"Error during code optimization: {error_message}")
-        return jsonify({"status": "error", "message": error_message})
+        return jsonify({"status": "error", "message": error_message}), 500
 
 @app.route('/syntax-highlight', methods=['POST'])
 def syntax_highlight():
@@ -83,7 +83,7 @@ def syntax_highlight():
     except Exception as e:
         error_message = error_handler.handle_runtime_error(str(e))
         logging.error(f"Error during syntax highlighting: {error_message}")
-        return jsonify({"status": "error", "message": error_message})
+        return jsonify({"status": "error", "message": error_message}), 500
 
 @app.route('/ask', methods=['POST'])
 def ask():
@@ -96,12 +96,12 @@ def ask():
         if response.status_code == 200:
             data = response.json()
             return jsonify({"status": "success", "response": data.get('extract', 'No information found.')})
-        return jsonify({"status": "error", "message": 'Error retrieving information.'})
+        return jsonify({"status": "error", "message": 'Error retrieving information.'}), response.status_code
     
     except Exception as e:
         error_message = error_handler.handle_runtime_error(str(e))
         logging.error(f"Error during question retrieval: {error_message}")
-        return jsonify({"status": "error", "message": error_message})
+        return jsonify({"status": "error", "message": error_message}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
