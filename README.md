@@ -81,7 +81,7 @@ Navigate to the "Playground" section on the website.
 Use the provided textarea to write and execute your NLP commands.
 The Flask backend will handle the execution and return results directly to the web interface.
 
-**Additional Notes**
+**(Additional Notes)**
 Backend Scripts: Ensure that playground_backend.py and other related backend scripts are correctly set up and running as per the Flask application. The backend handles the API requests from the frontend.
 
 **Frontend and Backend Communication:** The frontend (HTML/JavaScript) sends requests to the backend Flask server. Make sure that the endpoints (e.g., /execute, /optimize, /nlp-command, /syntax-highlight) are correctly defined and functioning in your Flask application.
