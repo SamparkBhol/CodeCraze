@@ -4,7 +4,7 @@
 body {
     font-family: 'Source Code Pro', monospace;
     background: linear-gradient(to right, #6a11cb, #2575fc);
-    color: #fff;
+    color: #ffffff;
     margin: 0;
     padding: 0;
 }
@@ -12,7 +12,7 @@ body {
 header {
     text-align: center;
     padding: 20px;
-    background: #333;
+    background: #1b1212;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
